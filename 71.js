@@ -17,18 +17,15 @@ function strToInt(str) {
 }
 
 function intToStr(num) {
-  let p = 0, ret = '';
+  let ret = [], neg = false;
   let arr = ['0','1','2','3','4','5','6','7','8','9'];
-  let prev = Math.abs(num % Math.pow(10, p));
-  let rem = 0;
-  while (rem != Math.abs(num)) {
-    p++;
-    rem = Math.abs(num % Math.pow(10, p)); 
-    let val = (rem - prev) / Math.pow(10, p-1);
-    prev = rem;
-    ret+= arr[val];
+  if (num < 0) { neg = true; }
+  num = Math.abs(num);
+  while (num != 0) {
+    ret.push(arr[num % 10]);
+    num = Math.floor(num / 10);
   }
-  return num < 0 ? '-' + ret.split('').reverse().join('') : ret.split('').reverse().join('');
+  return neg ? '-' + ret.reverse().join('') : ret.reverse().join('');
 }
 
 //console.log(strToInt(str));
